@@ -1,8 +1,8 @@
 export interface Bunny {
-    id: string;
+    id?: string;
     name: string;
     avatar?: string;
-    hapiness?: string;
+    hapiness?: number;
 }
 
 export interface Config {

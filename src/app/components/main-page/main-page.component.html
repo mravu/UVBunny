@@ -1,1 +1,24 @@
-<p>main-page works!</p>
+<h1>UVBunny</h1>
+  <mat-card>
+    <form (ngSubmit)="addBunny()">
+    <mat-card-title>Add a new Bunny</mat-card-title>
+    <mat-card-content> 
+            <mat-form-field appearance="fill">
+                <mat-label>Bunny Name</mat-label>
+                <input matInput [(ngModel)]="newBunny.name" name="newBunnyName" required>
+            </mat-form-field>     
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit">Add Bunny</button>
+        </mat-card-actions>
+    </form>
+  </mat-card>
+  <div class="bunny-list">
+    <mat-card *ngFor="let bunny of bunnies" class="bunny-card">
+      <mat-card-title>{{ bunny.name }}</mat-card-title>
+      <mat-card-content>
+        <!-- <p>Status: {{ bunny.status }}</p>
+        <p>Last Updated: {{ bunny.lastUpdated}}</p> -->
+      </mat-card-content>
+    </mat-card>
+  </div>
