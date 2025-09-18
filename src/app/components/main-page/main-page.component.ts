@@ -4,6 +4,8 @@ import { Bunny } from '../../model/bunnyModel';
 import { MaterialModule } from '../../material.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
+import { AppRoutingModule } from '../../app-routing.module';
 
 @Component({
   selector: 'app-main-page',
@@ -14,23 +16,35 @@ import { FormsModule } from '@angular/forms';
 })
 export class MainPageComponent  implements OnInit{
   bunnies: Bunny[] = [];
-  newBunny = {name :'', hapiness:0, avatar:''}
+  averageHappiness : number = 0;
+  newBunny = {id:'', name :'', hapiness:0, avatar:''}
 
-  constructor(private bunnyService: BunnyService) {}
+  constructor(private router: Router, private bunnyService: BunnyService) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.bunnyService.getBunnies().subscribe(data => {
       this.bunnies = data;
+      this.calculateAverageHappiness();
+    });
+  }
+  calculateAverageHappiness() {
+    if (this.bunnies.length === 0) {
+      this.averageHappiness = 0;
+      return;
+    }
+    const total = this.bunnies.reduce((sum, b) => sum + b.hapiness, 0);
+    this.averageHappiness = Math.round(total / this.bunnies.length);
+  }
+
+  addBunny() {
+    const newBunny: Bunny = this.newBunny;
+    this.bunnyService.addBunny(this.newBunny.name).then(() => {
+      this.newBunny.name = '';
     });
   }
 
-  addBunny(): void {
-    const newBunny: Bunny = this.newBunny;
-    this.bunnyService.addBunny(newBunny).then(() => {
-      console.log('Bunny added successfully');
-    }).catch(error => {
-      console.error('Error adding bunny: ', error);
-    });
+  goToBunnyDetails(id:string){
+this.router.navigate(['/bunny',id])
   }
 
 }

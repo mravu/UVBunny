@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { AngularFirestore } from "@angular/fire/compat/firestore";
+import { Firestore,  collection,  collectionData , addDoc, query, getDocs, where } from '@angular/fire/firestore';
 import { Observable } from "rxjs";
 import { Bunny } from "../model/bunnyModel";
 
@@ -7,17 +7,22 @@ import { Bunny } from "../model/bunnyModel";
   providedIn: 'root'
 })
 export class BunnyService {
-  constructor(private firestore: AngularFirestore) {}
+  constructor(private firestore: Firestore) {}
 
-  getBunnies(): Observable<any[]> {
-    return this.firestore.collection('bunnies').valueChanges();
+  getBunnies(): Observable<Bunny[]> {
+    const bunniesRef = collection(this.firestore, 'bunnies');
+    return collectionData(bunniesRef, { idField: 'id' }) as Observable<Bunny[]>;
   }
 
-  addBunny(bunny: Bunny): Promise<any> {
-    return this.firestore.collection('bunnies').add(bunny);
+  addBunny(name: string): Promise<string> {
+    const bunny = { name, hapiness: 0 };
+    const bunniesRef = collection(this.firestore, 'bunnies');
+    return addDoc(bunniesRef, bunny).then(docRef => docRef.id);
   }
   
-  getBunnyById(id: string): Observable<Bunny | undefined> {
-    return this.firestore.collection<Bunny>('bunnies').doc(id).valueChanges();
+  getBunnyById(id: string) {
+    const eventsRef = collection(this.firestore, 'events');
+    const q = query(eventsRef, where('bunnyId', '==', id));
+    return getDocs(q);
   }
 }

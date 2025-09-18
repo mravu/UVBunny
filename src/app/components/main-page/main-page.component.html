@@ -14,11 +14,14 @@
     </form>
   </mat-card>
   <div class="bunny-list">
-    <mat-card *ngFor="let bunny of bunnies" class="bunny-card">
+    <div *ngFor="let bunny of bunnies">
+    <mat-card class="bunny-card" (click)="goToBunnyDetails(bunny.id)">
       <mat-card-title>{{ bunny.name }}</mat-card-title>
       <mat-card-content>
-        <!-- <p>Status: {{ bunny.status }}</p>
-        <p>Last Updated: {{ bunny.lastUpdated}}</p> -->
+        <img *ngIf="bunny.avatar" [src]="bunny.avatar" class="card-image-top"/>
+        <p>Hapiness: {{ bunny.hapiness }}</p>
+        <mat-progress-bar mode="determinate" [value]="bunny.hapiness"></mat-progress-bar>
       </mat-card-content>
     </mat-card>
+  </div>
   </div>
