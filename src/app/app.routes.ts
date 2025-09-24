@@ -1,8 +1,10 @@
 import { Routes } from '@angular/router';
-import { MainPageComponent } from './components/main-page/main-page.component';
-import { BunnyDetailComponent } from './components/bunny-detail/bunny-detail.component';
+
+
 
 export const routes: Routes = [
-   { path:'', component: MainPageComponent},
-   {path: "bunny/:id", component: BunnyDetailComponent}
-];
+    { path: '', redirectTo: 'main', pathMatch: 'full' },
+    { path: 'main', loadComponent: () => import('./components//main-page/main-page.component').then(m => m.MainPageComponent) },
+    { path: 'config', loadComponent: () => import('./components/config-page/config-page.component').then(m => m.ConfigPageComponent) },
+    { path: 'bunny/:id', loadComponent: () => import('./components/bunny-detail/bunny-detail.component').then(m => m.BunnyDetailComponent) }
+  ];

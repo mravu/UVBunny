@@ -1,1 +1,25 @@
-<p>config-page works!</p>
+  
+  <div class="container" *ngIf="current">
+    <h2>Eating Points</h2>
+    <mat-form-field>
+      <mat-label>Lettuce</mat-label>
+      <input matInput type="number" [(ngModel)]="current.lettucePoints">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Carrot</mat-label>
+      <input matInput type="number" [(ngModel)]="current.carrotPoints">
+    </mat-form-field>
+  
+    <h2>Playing Points</h2>
+    <mat-form-field>
+      <mat-label>Base</mat-label>
+      <input matInput type="number" [(ngModel)]="current.playPoints">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Repeat Multiplier</mat-label>
+      <input matInput type="number" [(ngModel)]="current.playBonusPoints">
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" (click)="save()">Save</button>
+  </div>
+  

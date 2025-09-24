@@ -1,27 +1,48 @@
-# UVBunny
+# 🐇 UVbunny
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
+UVbunny is a playful Angular + Firebase web app that helps you monitor the wellbeing of your bunnies 🐰.  
+Track happiness through events like **eating** 🥬🥕 and **playing**, and configure how many points each activity is worth.  
+All data is stored in **Firestore**, and happiness is calculated dynamically in the client — so it works fully on the **Firebase Spark (free) plan**.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Hosting  link
 
-## Code scaffolding
+https://uvbunny-97b73.web.app/main
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## Firebase  link
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+https://console.firebase.google.com/u/0/project/uvbunny-97b73/overview
 
-## Running unit tests
+## 🚀 Features
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+##  Tabs Implementation
 
-## Running end-to-end tests
+ - To shift between Main and Config page.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- **Main Page**
+  - View all your bunnies
+  - See each bunny’s happiness
+  - Add new bunnies
+  - Overall average happiness
 
-## Further help
+- **Bunny Details Page**
+  - View all events for a bunny
+  - Add new events:
+    - Eating (🥬 lettuce = 1 pt, 🥕 carrot = 3 pts by default)
+    - Playing (2 pts, doubled if they’ve played with the same bunny before)
+  - Upload an avatar for your bunny (I was running into  CORS error due to spark plan,  I'm   unable to create bucket because of plan limitation to store images)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- **Config Page**
+  - Adjust how many points each activity is worth
+  - Config changes apply retroactively because happiness is computed from events + config
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** Angular, AngularFire, Angular Material
+- **Backend:** Firebase (Firestore + Storage)
+- **Hosting:** Firebase Hosting
+- **Plan:** 100% Spark-plan compatible (no Cloud Functions required)

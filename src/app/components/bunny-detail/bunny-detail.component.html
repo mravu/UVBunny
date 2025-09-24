@@ -1,1 +1,44 @@
-<p>bunny-detail works!</p>
+<div class="bunny-container">
+    <div class="bunny-header">
+      <div class="bunny-info" *ngIf="bunny">
+        <h2>{{ bunny.name }}</h2>
+        <p><strong>Happiness:</strong> {{ bunny.hapiness }}</p>
+      </div>
+      <div class="bunny-avatar">
+        <img *ngIf="bunny?.avatar" [src]="bunny.avatar" alt="Bunny Avatar" />
+        <input type="file" (change)="uploadAvatar($event)" />
+      </div>
+    </div>
+  
+    <form (ngSubmit)="submitEvent()" class="event-form">
+      <div class="form-row">
+        <label>Event Type</label>
+        <select [(ngModel)]="newEvent.type" name="type" (change)="onTypeChange()">
+          <option value="eating">Eating</option>
+          <option value="playing">Playing</option>
+        </select>
+      </div>
+  
+      <div class="form-row">
+        <label>{{ newEvent.type === 'eating' ? 'Food' : 'Playmate' }}</label>
+        <select [(ngModel)]="newEvent.detail" name="detail" required>
+          <option *ngFor="let option of dropdownOptions" [value]="option">{{ option }}</option>
+        </select>
+      </div>
+  
+      <button type="submit" mat-raised-button   color="primary">Add Event</button>
+    </form>
+  
+    <div class="event-history">
+      <h4>Event History</h4>
+      <ul>
+        <li *ngFor="let event of bunnyEvents">
+          <div class="event-row">
+            <span>{{ event.type | titlecase }} - {{ event.detail }} (+{{ event.points }} pts)</span>
+            <small>{{ event.timestamp.toDate() | date:'short' }}</small>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  

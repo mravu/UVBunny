@@ -1,3 +1,5 @@
+import { Timestamp } from "@angular/fire/firestore";
+
 export interface Bunny {
     id: string;
     name: string;
@@ -9,12 +11,14 @@ export interface Config {
     lettucePoints: number;
     carrotPoints: number;
     playPoints: number;
+    playBonusPoints: number;
 }
 
 export interface Events {
     id: string;
     bunnyId: string;
     type: 'eating' | 'playing';
-    detail: 'carrot' | 'lettuce';
-    timestamp: Date;
+    detail: string;
+    timestamp: Timestamp;
+    points: number;
 }

@@ -10,13 +10,16 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 import { BunnyDetailComponent } from './components/bunny-detail/bunny-detail.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
+import { ConfigPageComponent } from './components/config-page/config-page.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MainPageComponent,
-    BunnyDetailComponent
+    BunnyDetailComponent,
+    ConfigPageComponent
+
   ],
   imports: [
     BrowserModule,
